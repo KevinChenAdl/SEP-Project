@@ -1,0 +1,99 @@
+{
+    "tests": [
+        {
+            "name": "Basic Test 1",
+            "description": "Checks that the algorithm can construct a basic path",
+            "input-nodes": [
+                [1, "TEST1", 1, 0, 1],
+                [2, "TEST2", 0, 0, 1],
+                [3, "TEST3", 0, 1, 1]
+            ],
+            "input-edges": [
+                ["TEST1", "TEST2", 1],
+                ["TEST2", "TEST3", 1]
+            ],
+            "start-node": "TEST1",
+            "end-node": "TEST3",
+            "excluded-nodes": [],
+            "expected": [
+                ["TEST1,TEST2,TEST3", 3]
+            ]
+        },
+        {
+            "name": "Basic Test 2",
+            "description": "Checks that the algorithm can construct basic paths",
+            "input-nodes": [
+                [1, "TEST1", 1, 0, 1],
+                [2, "TEST2", 0, 0, 1],
+                [3, "TEST3", 0, 0, 1],
+                [4, "TEST4", 0, 0, 1],
+                [5, "TEST5", 0, 0, 1],
+                [6, "TEST6", 0, 0, 1],
+                [7, "TEST7", 0, 1, 1]
+            ],
+            "input-edges": [
+                ["TEST1", "TEST2", 1],
+                ["TEST1", "TEST7", 1],
+                ["TEST2", "TEST3", 1],
+                ["TEST3", "TEST7", 1],
+                ["TEST1", "TEST4", 1],
+                ["TEST4", "TEST5", 1],
+                ["TEST5", "TEST6", 1],
+                ["TEST5", "TEST7", 1]
+            ],
+            "start-node": "TEST1",
+            "end-node": "TEST7",
+            "excluded-nodes": [],
+            "expected": [
+                ["TEST1,TEST7", 1],
+                ["TEST1,TEST2,TEST3,TEST7", 5],
+                ["TEST1,TEST4,TEST5,TEST7", 5]
+            ]
+        },
+        {
+            "name": "Exclusion Test",
+            "description": "Checks that the algorithm can exclude paths",
+            "input-nodes": [
+                [1, "TEST1", 1, 0, 1],
+                [2, "TEST2", 0, 0, 1],
+                [3, "TEST3", 0, 0, 1],
+                [4, "TEST4", 0, 1, 1]
+            ],
+            "input-edges": [
+                ["TEST1", "TEST2", 1],
+                ["TEST1", "TEST3", 1],
+                ["TEST2", "TEST4", 1],
+                ["TEST3", "TEST4", 1]
+            ],
+            "start-node": "TEST1",
+            "end-node": "TEST4",
+            "excluded-nodes": ["TEST3"],
+            "expected": [
+                ["TEST1,TEST2,TEST4", 3]
+            ]
+        },
+        {
+            "name": "Cost Test",
+            "description": "Checks that the algorithm can consider path costs",
+            "input-nodes": [
+                [1, "TEST1", 1, 0, 5],
+                [2, "TEST2", 0, 0, 2],
+                [3, "TEST3", 0, 0, 5],
+                [4, "TEST4", 0, 1, 3]
+            ],
+            "input-edges": [
+                ["TEST1", "TEST2", 5],
+                ["TEST1", "TEST3", 5],
+                ["TEST2", "TEST4", 5],
+                ["TEST3", "TEST4", 1]
+            ],
+            "start-node": "TEST1",
+            "end-node": "TEST4",
+            "excluded-nodes": [],
+            "expected": [
+                ["TEST1,TEST3,TEST4", 11],
+                ["TEST1,TEST2,TEST4", 12]
+            ]
+        }
+    ]
+}
